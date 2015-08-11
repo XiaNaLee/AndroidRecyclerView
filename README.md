@@ -6,10 +6,12 @@ Android RecyclerView support addHeaderView,addFooterView and loadMore.
 ##代码设置
 
  **添加headView**
+ 
 `RcvSupportHead$FooterViewAdapter mAdapter`  
 `mAdapter.addHeader(headerView)`
 
  **添加footerView** 
+ 
 `mAdapter.addFooter(footerView)`
 
  **设置emptyView**  
