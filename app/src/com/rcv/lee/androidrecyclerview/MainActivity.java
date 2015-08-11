@@ -83,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void refreshData(){
+        mFooterPb.setVisibility(View.VISIBLE);
+        mFooterTv.setText(R.string.load_more);
         new Thread(new Runnable() {
             @Override
             public void run() {
