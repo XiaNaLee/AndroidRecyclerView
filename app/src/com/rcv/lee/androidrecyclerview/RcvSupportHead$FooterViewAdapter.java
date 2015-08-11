@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,21 +13,20 @@ import java.util.List;
  * android RecyclerView 支持添加FooterView And HeadView
  */
 public class RcvSupportHead$FooterViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
     private static final int TYPE_HEADER = 0;
 
     private static final int TYPE_FOOTER = 1;
 
     private static final int TYPE_ITEM = 2;
 
+    private static final int TYPE_EMPTY = 3;
+
     private View mHeaderView;
 
     private View mFooterView;
 
-    //headers
-    private List<View> headers = new ArrayList<>();
-
-    //footers
-    private List<View> footers = new ArrayList<>();
+    private View mEmptyView;
 
     private List<String> items;
 
@@ -48,6 +46,9 @@ public class RcvSupportHead$FooterViewAdapter extends RecyclerView.Adapter<Recyc
         } else if (viewType == TYPE_FOOTER) {
             View v = mFooterView;
             return new VHFooter(v);
+        } else if (viewType == TYPE_EMPTY) {
+            View v = mEmptyView;
+            return new VHEmpty(v);
         }
         throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
     }
@@ -61,20 +62,31 @@ public class RcvSupportHead$FooterViewAdapter extends RecyclerView.Adapter<Recyc
 
         } else if (holder instanceof VHFooter) {
 
+        } else if (holder instanceof VHEmpty) {
+
         }
     }
 
     @Override
     public int getItemCount() {
 
-        int count = getHeadViewSize() + items.size() + getFooterViewSize();
+        int count;
+        int size = items.size();
+        if (size == 0 && null != mEmptyView) {
+            count = 1;
+        } else {
+            count = getHeadViewSize() + size + getFooterViewSize();
+        }
         return count;
 
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position < getHeadViewSize()) {
+        int size = items.size();
+        if (size == 0 && null != mEmptyView) {
+            return TYPE_EMPTY;
+        } else if (position < getHeadViewSize()) {
             return TYPE_HEADER;
         } else if (position >= getHeadViewSize() + items.size()) {
             return TYPE_FOOTER;
@@ -131,6 +143,17 @@ public class RcvSupportHead$FooterViewAdapter extends RecyclerView.Adapter<Recyc
         notifyItemInserted(getHeadViewSize() + items.size() - 1);
     }
 
+    //refresh data
+    public void refreshData(List<String> datas){
+        items.clear();
+        addDatas(datas);
+    }
+
+    public void setEmptyView(View emptyView) {
+        mEmptyView = emptyView;
+        notifyItemInserted(0);
+    }
+
 
     class VHItem extends RecyclerView.ViewHolder {
         TextView mTextView;
@@ -150,6 +173,12 @@ public class RcvSupportHead$FooterViewAdapter extends RecyclerView.Adapter<Recyc
 
     class VHFooter extends RecyclerView.ViewHolder {
         public VHFooter(View itemView) {
+            super(itemView);
+        }
+    }
+
+    class VHEmpty extends RecyclerView.ViewHolder {
+        public VHEmpty(View itemView) {
             super(itemView);
         }
     }
