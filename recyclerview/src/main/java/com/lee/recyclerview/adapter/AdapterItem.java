@@ -6,7 +6,6 @@ import android.view.View;
 /**
  * adapter的所有item必须实现此接口.
  * 通过返回{@link #getLayoutResId()}来自动初始化view，之后在{@link #onBindViews(View)}中就可以初始化item的内部视图了。<br>
- *
  * @author Jack Tony
  * @date 2015/5/15
  */

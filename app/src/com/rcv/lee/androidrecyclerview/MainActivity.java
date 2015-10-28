@@ -27,6 +27,11 @@ import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
 
+/**
+ * Created by lee on 2015/7/16.
+ * Modified by lee on 15/10/28.
+ * Email:lee131483@gmail.com
+ */
 public class MainActivity extends AppCompatActivity {
 
     private PtrClassicFrameLayout mPtrClassicFrameLayout;

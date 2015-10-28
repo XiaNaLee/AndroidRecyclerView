@@ -10,8 +10,8 @@ import java.util.List;
 
 
 /**
- * @author Jack Tony
- * @date 2015/6/2
+ * Created by lee on 15/10/28.
+ * Email:lee131483@gmail.com
  */
 public abstract class MfCommonRcvAdapter<T> extends CommonRcvAdapter<T> {
 
@@ -62,7 +62,6 @@ public abstract class MfCommonRcvAdapter<T> extends CommonRcvAdapter<T> {
         int size = super.getItemCount();
         if (size == 0 && null != mEmptyView) {
             size = 1;
-            Log.d("mEmptyView", "size" + size);
         } else {
             if (null != mHeaderView)
                 size++;
